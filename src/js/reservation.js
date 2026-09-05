@@ -5,6 +5,7 @@ const modal = document.getElementById('reservation-modal');
 const form = document.getElementById('reservation-form');
 const modalBlock = document.getElementById('reservation-block');
 const modalClassroom = document.getElementById('reservation-classroom');
+const reservationsList = document.getElementById('reservations-list');
 
 // Fecha o modal
 function closeModal() {
@@ -68,6 +69,21 @@ function createReservation(event) {
   closeModal();
 }
 
+// Remove uma reserva
+function removeReservation(event) {
+  const button = event.target.closest('.remove-reservation');
+
+  if (!button) return;
+
+  const reservationId = Number(button.value);
+  const reservationIndex = reservations.findIndex(
+    (reservation) => reservation.id === reservationId,
+  );
+
+  reservations.splice(reservationIndex, 1);
+  populateReservationsTable(filterReservations());
+}
+
 // Inicializa o modal de reservas, incluindo valores no select do bloco
 export function initializeReservationModal() {
   structures.forEach((structure) => {
@@ -82,4 +98,5 @@ export function initializeReservationModal() {
   document.getElementById('open-reservation-modal').addEventListener('click', openModal);
   document.getElementById('close-reservation-modal').addEventListener('click', closeModal);
   form.addEventListener('submit', createReservation);
+  reservationsList.addEventListener('click', removeReservation);
 }

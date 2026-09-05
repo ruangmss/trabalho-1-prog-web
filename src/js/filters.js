@@ -65,7 +65,7 @@ export function populateReservationsTable(reservationsToDisplay) {
   if (reservationsToDisplay.length === 0) {
     reservationsList.innerHTML = `
       <tr>
-        <td colspan="5" class="p-4 text-center text-slate-500">
+        <td colspan="6" class="p-4 text-center text-slate-500">
           Nenhuma reserva encontrada.
         </td>
       </tr>
@@ -82,6 +82,15 @@ export function populateReservationsTable(reservationsToDisplay) {
       <td class="p-4">${reservation.classroom}</td>
       <td class="p-4">${reservation.date}</td>
       <td class="p-4">${reservation.shift}</td>
+      <td class="p-4">
+        <button
+          type="button"
+          value="${reservation.id}"
+          class="remove-reservation cursor-pointer rounded-lg bg-red-600 px-3 py-1 text-sm font-semibold text-white hover:bg-red-700"
+        >
+          Remover
+        </button>
+      </td>
     `;
     reservationsList.appendChild(item);
   });
