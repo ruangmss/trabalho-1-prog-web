@@ -43,8 +43,9 @@ export function populateClassrooms() {
   });
 }
 
+// Retorna as reservas que correspondem aos filtros
 export function filterReservations() {
-  const filteredReservations = reservations.filter((reservation) => {
+  return reservations.filter((reservation) => {
     const matchesName = reservation.applicant
       .toLowerCase()
       .includes(nameFilter.value.toLowerCase());
@@ -55,10 +56,13 @@ export function filterReservations() {
 
     return matchesName && matchesDate && matchesBlock && matchesClassroom;
   });
+}
 
+// Popula a tabela com as reservas recebidas
+export function populateReservationsTable(reservationsToDisplay) {
   reservationsList.innerHTML = '';
 
-  if (filteredReservations.length === 0) {
+  if (reservationsToDisplay.length === 0) {
     reservationsList.innerHTML = `
       <tr>
         <td colspan="5" class="p-4 text-center text-slate-500">
@@ -69,7 +73,7 @@ export function filterReservations() {
     return;
   }
 
-  filteredReservations.forEach((reservation) => {
+  reservationsToDisplay.forEach((reservation) => {
     const item = document.createElement('tr');
     item.className = 'border-b border-gray-200 last:border-b-0';
     item.innerHTML = `
@@ -83,10 +87,13 @@ export function filterReservations() {
   });
 }
 
-nameFilter.addEventListener('input', filterReservations);
-dateFilter.addEventListener('change', filterReservations);
-classroomFilter.addEventListener('change', filterReservations);
+// População da tabela de acordo com os eventos
+nameFilter.addEventListener('input', () => populateReservationsTable(filterReservations()));
+dateFilter.addEventListener('change', () => populateReservationsTable(filterReservations()));
+classroomFilter.addEventListener('change', () => populateReservationsTable(filterReservations()));
+
+// População de select de salas e da tabela com base no select do bloco
 blockFilter.addEventListener('change', () => {
   populateClassrooms();
-  filterReservations();
+  populateReservationsTable(filterReservations());
 });

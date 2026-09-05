@@ -1,5 +1,10 @@
-import { filterReservations, populateBlocks, populateClassrooms } from './filters.js';
+import {
+  filterReservations,
+  populateBlocks,
+  populateClassrooms,
+  populateReservationsTable,
+} from './filters.js';
 
 populateBlocks();
 populateClassrooms();
-filterReservations();
+populateReservationsTable(filterReservations());
