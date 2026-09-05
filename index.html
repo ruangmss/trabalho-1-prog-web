@@ -21,6 +21,7 @@
         </div>
 
         <button
+          id="open-reservation-modal"
           class="px-4 py-2 rounded-lg bg-blue-600 text-white max-w-max text-sm font-semibold hover:bg-blue-700 cursor-pointer"
         >
           Novo Agendamento
@@ -137,6 +138,68 @@
         </div>
       </section>
     </main>
+
+    <div
+      id="reservation-modal"
+      class="hidden fixed inset-0 bg-black/50 p-4 items-center justify-center"
+    >
+      <div class="w-full max-w-md rounded-xl bg-white p-5">
+        <div class="mb-4 flex items-center justify-between">
+          <h2 class="text-xl font-bold">Nova reserva</h2>
+          <button id="close-reservation-modal" type="button" class="cursor-pointer text-xl">
+            &times;
+          </button>
+        </div>
+
+        <form id="reservation-form" class="flex flex-col gap-3">
+          <input
+            id="reservation-applicant"
+            class="rounded-xl border-2 border-gray-200 px-3 py-2"
+            type="text"
+            placeholder="Nome do solicitante"
+            required
+          />
+          <select
+            id="reservation-block"
+            class="rounded-xl border-2 border-gray-200 px-3 py-2"
+            required
+          >
+            <option value="">Selecione o bloco</option>
+          </select>
+          <select
+            id="reservation-classroom"
+            class="rounded-xl border-2 border-gray-200 px-3 py-2"
+            required
+            disabled
+          >
+            <option value="">Selecione a sala</option>
+          </select>
+          <input
+            id="reservation-date"
+            class="rounded-xl border-2 border-gray-200 px-3 py-2"
+            type="date"
+            required
+          />
+          <select
+            id="reservation-shift"
+            class="rounded-xl border-2 border-gray-200 px-3 py-2"
+            required
+          >
+            <option value="">Selecione o turno</option>
+            <option value="Manhã">Manhã</option>
+            <option value="Tarde">Tarde</option>
+            <option value="Noite">Noite</option>
+          </select>
+
+          <button
+            type="submit"
+            class="rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white hover:bg-blue-700 cursor-pointer"
+          >
+            Salvar reserva
+          </button>
+        </form>
+      </div>
+    </div>
 
     <script type="module" src="./src/js/app.js"></script>
   </body>
