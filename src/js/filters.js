@@ -65,7 +65,7 @@ export function populateReservationsTable(reservationsToDisplay) {
   if (reservationsToDisplay.length === 0) {
     reservationsList.innerHTML = `
       <tr>
-        <td colspan="6" class="p-4 text-center text-slate-500">
+        <td colspan="6" class="p-4 text-center text-slate-500 max-sm:block">
           Nenhuma reserva encontrada.
         </td>
       </tr>
@@ -75,14 +75,31 @@ export function populateReservationsTable(reservationsToDisplay) {
 
   reservationsToDisplay.forEach((reservation) => {
     const item = document.createElement('tr');
-    item.className = 'border-b border-gray-200 last:border-b-0';
+    item.className =
+      'border-b border-gray-200 last:border-b-0 max-sm:mb-3 max-sm:block max-sm:rounded-xl max-sm:border-2 max-sm:bg-white';
     item.innerHTML = `
-      <td class="p-4 font-semibold">${reservation.applicant}</td>
-      <td class="p-4">${reservation.block}</td>
-      <td class="p-4">${reservation.classroom}</td>
-      <td class="p-4">${reservation.date}</td>
-      <td class="p-4">${reservation.shift}</td>
-      <td class="p-4">
+      <td class="p-4 font-semibold max-sm:flex max-sm:justify-between max-sm:gap-4 max-sm:border-b max-sm:p-3 max-sm:text-right">
+        <span class="hidden max-sm:block">Solicitante</span>
+        ${reservation.applicant}
+      </td>
+      <td class="p-4 max-sm:flex max-sm:justify-between max-sm:gap-4 max-sm:border-b max-sm:p-3 max-sm:text-right">
+        <span class="hidden font-semibold max-sm:block">Bloco</span>
+        ${reservation.block}
+      </td>
+      <td class="p-4 max-sm:flex max-sm:justify-between max-sm:gap-4 max-sm:border-b max-sm:p-3 max-sm:text-right">
+        <span class="hidden font-semibold max-sm:block">Sala</span>
+        ${reservation.classroom}
+      </td>
+      <td class="p-4 max-sm:flex max-sm:justify-between max-sm:gap-4 max-sm:border-b max-sm:p-3 max-sm:text-right">
+        <span class="hidden font-semibold max-sm:block">Data</span>
+        ${reservation.date}
+      </td>
+      <td class="p-4 max-sm:flex max-sm:justify-between max-sm:gap-4 max-sm:border-b max-sm:p-3 max-sm:text-right">
+        <span class="hidden font-semibold max-sm:block">Turno</span>
+        ${reservation.shift}
+      </td>
+      <td class="p-4 max-sm:flex max-sm:items-center max-sm:justify-between max-sm:gap-4 max-sm:p-3">
+        <span class="hidden font-semibold max-sm:block">Ação</span>
         <button
           type="button"
           value="${reservation.id}"
@@ -96,6 +113,7 @@ export function populateReservationsTable(reservationsToDisplay) {
   });
 }
 
+// Limpa filtros
 function clearFilters() {
   nameFilter.value = '';
   dateFilter.value = '';
