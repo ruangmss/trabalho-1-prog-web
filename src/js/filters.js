@@ -75,6 +75,7 @@ export function populateReservationsTable(reservationsToDisplay) {
 
   reservationsToDisplay.forEach((reservation) => {
     const item = document.createElement('tr');
+    const formattedDate = new Date(reservation.date + 'T00:00:00').toLocaleDateString('pt-BR');
     item.className =
       'border-b border-gray-200 last:border-b-0 max-sm:mb-3 max-sm:block max-sm:rounded-xl max-sm:border-2 max-sm:bg-white';
     item.innerHTML = `
@@ -92,7 +93,7 @@ export function populateReservationsTable(reservationsToDisplay) {
       </td>
       <td class="p-4 max-sm:flex max-sm:justify-between max-sm:gap-4 max-sm:border-b max-sm:p-3 max-sm:text-right">
         <span class="hidden font-semibold max-sm:block">Data</span>
-        ${reservation.date}
+        ${formattedDate}
       </td>
       <td class="p-4 max-sm:flex max-sm:justify-between max-sm:gap-4 max-sm:border-b max-sm:p-3 max-sm:text-right">
         <span class="hidden font-semibold max-sm:block">Turno</span>
