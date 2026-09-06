@@ -1,5 +1,6 @@
 import { reservations, structures } from './data.js';
 import { filterReservations, populateReservationsTable } from './filters.js';
+import { updateMetrics } from './metrics.js';
 
 const modal = document.getElementById('reservation-modal');
 const form = document.getElementById('reservation-form');
@@ -66,6 +67,7 @@ function createReservation(event) {
   });
 
   populateReservationsTable(filterReservations());
+  updateMetrics();
   closeModal();
 }
 
@@ -82,6 +84,7 @@ function removeReservation(event) {
 
   reservations.splice(reservationIndex, 1);
   populateReservationsTable(filterReservations());
+  updateMetrics();
 }
 
 // Inicializa o modal de reservas, incluindo valores no select do bloco

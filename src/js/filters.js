@@ -96,6 +96,14 @@ export function populateReservationsTable(reservationsToDisplay) {
   });
 }
 
+function clearFilters() {
+  nameFilter.value = '';
+  dateFilter.value = '';
+  blockFilter.value = '';
+  populateClassrooms();
+  populateReservationsTable(reservations);
+}
+
 // População da tabela de acordo com os eventos
 nameFilter.addEventListener('input', () => populateReservationsTable(filterReservations()));
 dateFilter.addEventListener('change', () => populateReservationsTable(filterReservations()));
@@ -106,3 +114,5 @@ blockFilter.addEventListener('change', () => {
   populateClassrooms();
   populateReservationsTable(filterReservations());
 });
+
+document.getElementById('clear-filters').addEventListener('click', clearFilters);
