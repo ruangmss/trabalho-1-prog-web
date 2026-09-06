@@ -51,12 +51,14 @@ function changeModalBlock() {
 function createReservation(event) {
   event.preventDefault();
 
+  const block = modalBlock.value;
   const classroom = modalClassroom.value;
   const date = document.getElementById('reservation-date').value;
   const shift = document.getElementById('reservation-shift').value;
 
   const classroomIsReserved = reservations.some(
     (reservation) =>
+      reservation.block === block &&
       reservation.classroom === classroom &&
       reservation.date === date &&
       reservation.shift === shift,
@@ -70,7 +72,7 @@ function createReservation(event) {
   reservations.push({
     id: Date.now(),
     applicant: document.getElementById('reservation-applicant').value,
-    block: modalBlock.value,
+    block,
     classroom,
     date,
     shift,
