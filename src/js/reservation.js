@@ -14,6 +14,8 @@ function closeModal() {
   modal.classList.remove('flex');
   form.reset();
   modalClassroom.innerHTML = '<option value="">Selecione a sala</option>';
+  modalClassroom.disabled = true;
+  modalClassroom.classList.add('cursor-not-allowed', 'opacity-75');
 }
 
 // Abre o modal
@@ -27,6 +29,15 @@ function changeModalBlock() {
   modalClassroom.innerHTML = '<option value="">Selecione a sala</option>';
   const selectedBlock = structures.find((structure) => structure.block === modalBlock.value);
 
+  if (!selectedBlock) {
+    modalClassroom.disabled = true;
+    modalClassroom.classList.add('cursor-not-allowed', 'opacity-75');
+    return;
+  }
+
+  modalClassroom.disabled = false;
+  modalClassroom.classList.remove('cursor-not-allowed', 'opacity-75');
+
   selectedBlock.classrooms.forEach((classroom) => {
     const option = document.createElement('option');
     option.textContent = classroom;
@@ -34,7 +45,6 @@ function changeModalBlock() {
     modalClassroom.appendChild(option);
   });
 
-  modalClassroom.disabled = !selectedBlock;
 }
 
 // Cria uma reserva
